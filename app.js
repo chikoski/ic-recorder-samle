@@ -161,6 +161,16 @@ function initializeStorage(){
  * @return {null}
  */
 function initializeAudioStream(){
+  navigator.getUserMedia({video: false, audio:true},
+  function(_stream){
+    console.log("ストリーム取得")
+    stream = _stream;
+    initializeRecorder();
+    initializeVisualizer();
+    ui.startButton.disabled = false;
+  }, function(error){
+    console.log(error);
+  });
 }
 
 // アプリ起動時の処理
