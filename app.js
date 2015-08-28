@@ -144,6 +144,22 @@ function initializeRecorder(){
  * @return {null}
  */
 function initializeVisualizer(){
+  if(stream != null && ui.indicator != null){
+    var audioContext= new AudioContext();
+    visualizer.sourceNode = audioContext.createMediaStreamSource(stream);
+
+    visualizer.analyser = audioContext.createAnalyser();
+    visualizer.analyser.fftSize = 32;
+    visualizer.buffer = new Uint8Array(visualizer.analyser.frequencyBinCount);
+
+    visualizer.sourceNode.connect(visualizer.analyser);
+
+    visualizer.audioContext = audioContext;
+    visualizer.canvas = ui.indicator;
+    visualizer.graphicsContext = visualizer.canvas.getContext("2d");
+
+    update();
+  }  
 }
 
 /**
