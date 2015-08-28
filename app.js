@@ -107,6 +107,16 @@ function createFileName(){
  * @return {null}
  */
 function saveCapturedData(blob){
+  if(storage != null){
+    var req = storage.addNamed(blob, createFileName());
+    req.onsuccess = function(){
+      console.log(this.result + "に保存");
+    };
+
+    req.onerror = function(){
+      console.log(this.error.name + ":" + this.error.message);
+    };
+  }
 }
 
 /**
