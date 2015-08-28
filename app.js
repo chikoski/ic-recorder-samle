@@ -154,6 +154,7 @@ function update(){
  * @return {null}
  */
 function initializeStorage(){
+  storage = navigator.getDeviceStorage("music");
 }
 
 /**
