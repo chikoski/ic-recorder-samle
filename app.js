@@ -107,16 +107,6 @@ function createFileName(){
  * @return {null}
  */
 function saveCapturedData(blob){
-  if(storage != null){
-    var req = storage.addNamed(blob, createFileName());
-    req.onsuccess = function(){
-      console.log(this.result + "に保存");
-    };
-
-    req.onerror = function(){
-      console.log(this.error.name + ":" + this.error.message);
-    };
-  }
 }
 
 /**
@@ -124,19 +114,6 @@ function saveCapturedData(blob){
  * @return {null}
  */
 function initializeRecorder(){
-  if(stream != null){
-    console.log("MediaRecorder 初期化")
-    recorder = new MediaRecorder(stream);
-
-    recorder.addEventListener("stop", function(event){
-      toggleRecordButtonState();
-    });
-
-    recorder.addEventListener("dataavailable", function(event){
-      console.log("blob取得");
-      saveCapturedData(event.data);
-    });
-  }
 }
 
 /**
@@ -144,22 +121,6 @@ function initializeRecorder(){
  * @return {null}
  */
 function initializeVisualizer(){
-  if(stream != null && ui.indicator != null){
-    var audioContext= new AudioContext();
-    visualizer.sourceNode = audioContext.createMediaStreamSource(stream);
-
-    visualizer.analyser = audioContext.createAnalyser();
-    visualizer.analyser.fftSize = 32;
-    visualizer.buffer = new Uint8Array(visualizer.analyser.frequencyBinCount);
-
-    visualizer.sourceNode.connect(visualizer.analyser);
-
-    visualizer.audioContext = audioContext;
-    visualizer.canvas = ui.indicator;
-    visualizer.graphicsContext = visualizer.canvas.getContext("2d");
-
-    update();
-  }
 }
 
 /**
@@ -167,16 +128,6 @@ function initializeVisualizer(){
  * @return {null}
  */
 function doUpdateVisualizer(){
-  var gc = visualizer.graphicsContext;
-  gc.fillStyle = "white";
-  gc.fillRect(0, 0,
-              visualizer.canvas.width,
-              visualizer.canvas.height);
-  var h = visualizer.volume * visualizer.canvas.height;
-  gc.fillStyle = "green";
-  gc.fillRect(0, visualizer.canvas.height - h,
-              visualizer.canvas.width,
-              h);
 }
 
 /**
@@ -203,7 +154,6 @@ function update(){
  * @return {null}
  */
 function initializeStorage(){
-  storage = navigator.getDeviceStorage("music");
 }
 
 /**
@@ -211,16 +161,6 @@ function initializeStorage(){
  * @return {null}
  */
 function initializeAudioStream(){
-  navigator.getUserMedia({video: false, audio:true},
-    function(_stream){
-      console.log("ストリーム取得")
-      stream = _stream;
-      initializeRecorder();
-      initializeVisualizer();
-      ui.startButton.disabled = false;
-    }, function(error){
-      console.log(error);
-    });
 }
 
 // アプリ起動時の処理

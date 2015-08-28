@@ -11,15 +11,5 @@
   "developer": {
     "name": "Your name",
     "url": "http://example.com"
-  },
-  "type": "privileged",
-  "permissions": {
-    "device-storage:music": {
-      "access": "readwrite",
-      "description": "録音データの保存ため"
-    },
-    "audio-capture": {
-      "description": "録音のため"
-    }
   }
 }
