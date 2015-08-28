@@ -114,6 +114,19 @@ function saveCapturedData(blob){
  * @return {null}
  */
 function initializeRecorder(){
+  if(stream != null){
+    console.log("MediaRecorder 初期化")
+    recorder = new MediaRecorder(stream);
+
+    recorder.addEventListener("stop", function(event){
+      toggleRecordButtonState();
+    });
+
+    recorder.addEventListener("dataavailable", function(event){
+      console.log("blob取得");
+      saveCapturedData(event.data);
+    });
+  }
 }
 
 /**
