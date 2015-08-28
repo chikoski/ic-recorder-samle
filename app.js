@@ -28,7 +28,7 @@ var visualizer = {
   },
   get volume(){
     this.analyser.getByteFrequencyData(this.buffer);
-    return scale(average(this.buffer), 0, 255);
+    return scale(average(this.buffer), 0, 128);
   }
 };
 
