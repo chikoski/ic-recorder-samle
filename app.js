@@ -118,7 +118,7 @@ function initializeVisualizer(){
     visualizer.graphicsContext = visualizer.canvas.getContext("2d");
 
     update();
-
+  }
 }
 
 function doUpdateVisualizer(){
@@ -159,7 +159,7 @@ function initializeAudioStream(){
       ui.startButton.disabled = false;
     }, function(error){
       console.log(error);
-    })
+    });
 }
 
 window.addEventListener("load", function() {
@@ -191,7 +191,6 @@ window.addEventListener("load", function() {
   initializeStorage();
   initializeAudioStream();
 });
-
 window.addEventListener("beforeunload", function(){
   console.log("アプリ終了");
   if(stream != null){
