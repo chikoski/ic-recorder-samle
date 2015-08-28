@@ -159,7 +159,7 @@ function initializeVisualizer(){
     visualizer.graphicsContext = visualizer.canvas.getContext("2d");
 
     update();
-  }  
+  }
 }
 
 /**
@@ -167,6 +167,16 @@ function initializeVisualizer(){
  * @return {null}
  */
 function doUpdateVisualizer(){
+  var gc = visualizer.graphicsContext;
+  gc.fillStyle = "white";
+  gc.fillRect(0, 0,
+              visualizer.canvas.width,
+              visualizer.canvas.height);
+  var h = visualizer.volume * visualizer.canvas.height;
+  gc.fillStyle = "green";
+  gc.fillRect(0, visualizer.canvas.height - h,
+              visualizer.canvas.width,
+              h);  
 }
 
 /**
