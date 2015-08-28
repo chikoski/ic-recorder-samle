@@ -111,6 +111,10 @@ function saveCapturedData(blob){
     var req = storage.addNamed(blob, createFileName());
     req.onsuccess = function(){
       console.log(this.result + "に保存");
+      new Notification("IC Recorder", {
+                        body: "音声を " +  filename + " に保存しました。",
+                        icon: "/icons/icon16x16.png"
+                      });      
     };
 
     req.onerror = function(){
@@ -176,7 +180,7 @@ function doUpdateVisualizer(){
   gc.fillStyle = "green";
   gc.fillRect(0, visualizer.canvas.height - h,
               visualizer.canvas.width,
-              h);  
+              h);
 }
 
 /**
