@@ -21,5 +21,7 @@
     "audio-capture": {
       "description": "録音のため"
     }
+  },"desktop-notification": {
+    "description": "保存できたかどうかを通知するため"
   }
 }
